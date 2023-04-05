@@ -1,0 +1,69 @@
+html{
+	padding: 0px;
+}
+
+.display{
+	background-color: #8b7b5e;
+	width: 200px;
+	height: 165px;
+	color: white;
+	text-align: left;
+
+	padding: 15px 10px;
+}
+
+.display span{
+	font-size: 11px;
+	opacity: 45%;
+}
+
+
+#start{
+	color: white;
+}
+
+#start:hover{
+	color: #483e2a;
+}
+
+
+#e{
+	background-color: #8b7b5e;
+	width: 200px;
+	height: 60px;
+	color: white;
+
+	padding: 5px 10px;
+}
+
+
+#game a{
+	text-decoration: none;
+	background-color: #726245;
+	color: white;
+
+	padding: 10px 15px;
+	margin-left: 1.2px;
+}
+
+#game{
+	visibility: hidden;
+}
+
+#game a:hover{
+	background-color: #564a33;
+}
+
+
+.choose{
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+
+
+#console{
+	background-color: #483e2a;
+	width: 220px;
+
+	padding: 10px;
+}

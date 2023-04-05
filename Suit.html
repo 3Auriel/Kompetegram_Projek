@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Main Suit</title>
+</head>
+<body>
+	<script>
+		let playerCh, enemyCh;
+		let list = ["Rock", "Paper", "Scissor"];
+		let state = 0; //state = 0(mulai) - 1(mulai baru) - 2(Win Cons) - 3(Lose Cons) - 4(reload)
+
+		let win = 0, lose = 0 ,round = 1;
+
+		function newGame(){
+			document.getElementById("enemy").innerHTML = "*****";		
+		}
+
+		function confirmation(data){
+			playerCh = data;
+			document.getElementById("player").innerHTML = "You use " + list[playerCh];
+
+			enemyCh = Math.floor((Math.random() * 10) % 3);
+			document.getElementById("enemy").innerHTML = "Enemy use " + list[enemyCh];
+			document.getElementById("message").innerHTML = "Result ";
+
+			if(playerCh == 0 && enemyCh == 2 || playerCh == 1 && enemyCh == 0 || playerCh == 2 && enemyCh == 1){
+				document.getElementById("message").innerHTML += "You Win";
+				win += 1;
+			}else if(enemyCh == 0 && playerCh == 2 || enemyCh == 1 && playerCh == 0 || enemyCh == 2 && playerCh == 1){
+				document.getElementById("message").innerHTML += "You Lose";
+				lose += 1;
+			}else{
+				document.getElementById("message").innerHTML += "Draw";
+			}
+
+			round++;
+
+			if(round >= 5){
+				if(win > lose){
+					status(2);
+				}else if(lose > win){
+					status(3);
+				}else{
+					status(4);
+				}	
+			}else{
+				status(1);
+			}
+
+		}
+
+		function status(data){// data = 0(mulai) - 1(main) - 
+			if(data == 0){
+				document.getElementById('game').style.visibility='visible';
+				document.getElementById('start').style.visibility='hidden';
+
+				document.getElementById('disp').style.opacity = "100%";
+
+				document.getElementById('headline').innerHTML = "Mission: Win this game in 5 rounds!<br>Round: " + round + " || win = " + win + " | lose = " + lose;
+				document.getElementById('enemy').innerHTML = "Enemy use *****";
+				document.getElementById('player').innerHTML = "";
+				document.getElementById('message').innerHTML = "";
+				document.getElementById('e1').innerHTML = "What are you gonna choose?";
+				
+				state = 1;
+			}else if(data == 1){
+				document.getElementById('game').style.visibility='hidden';
+				document.getElementById('start').style.visibility='visible';
+
+				document.getElementById('disp').style.opacity = "75%";
+
+				document.getElementById('headline').innerHTML = "Mission: Win this game in 5 rounds!<br>Round: " + round + " || win = " + win + " | lose = " + lose;
+				document.getElementById('e1').innerHTML = "Click here to go to<br>";
+				document.getElementById('start').innerHTML = "Next Round";
+
+				state = 0;
+			}else if(data >= 2 && data <= 4){
+				document.getElementById('game').style.visibility='hidden';
+				document.getElementById('start').style.visibility='visible';
+
+				document.getElementById('headline').innerHTML = "Mission: Win this game in 5 rounds!<br>Round: " + round + " || win = " + win + " | lose = " + lose;
+				if(data == 2){
+					document.getElementById('console').style = "background-color: #2a482a";
+					document.getElementById('disp').style = "background-color: #5e8b68";
+					document.getElementById('e').style = "background-color: #5e8b68";
+
+					document.getElementById('e1').innerHTML = "Mission success, you win!<br>";
+				}else if(data == 3){
+					document.getElementById('console').style = "background-color: #482a2a";
+					document.getElementById('disp').style = "background-color: #8b5e5e";
+					document.getElementById('e').style = "background-color: #8b5e5e";
+
+
+					document.getElementById('e1').innerHTML = "Mission failed, you lose!<br>";
+				}else if(data == 4){
+					document.getElementById('console').style = "background-color: #6b701c";
+					document.getElementById('disp').style = "background-color: #999b28";
+					document.getElementById('e').style = "background-color: #999b28";
+
+					document.getElementById('e1').innerHTML = "Mission is unclear, it's draw!<br>";
+				}
+
+				document.getElementById('start').innerHTML = "Play Again?";
+
+				state = 5;
+			}else if(data == 5){
+				location.reload();
+			}
+		}
+	</script>
+
+	<div id="console">
+
+		<div class="display" id="disp">
+			<d1 id="headline">Welcome to Rock, Paper, Scissor Game!</d1><br>
+			<hr>
+			<e id="enemy">The game is simple, you have to win in 5 rounds.</e><br>
+			<c id="player"></c><br><br><br>
+			<d id="message">Good luck!</d><br>
+			<span>&#169made by muhammad auriel, nim 2200168</span>
+		</div>
+
+		<div id="e">
+			<hr>
+
+			<d id="e1">Click here to </d><a id="start" href="#console" onClick="status(state)">Start</a>
+		</div>
+		
+
+		<div class="choose">
+			<div id="game">
+				<a href ="#console" onClick = "confirmation('0')">Rock</a>
+				<a href ="#console" onClick = "confirmation('1')">Paper</a>
+				<a href ="#console" onClick = "confirmation('2')">Scissor</a>
+			</div>
+			
+		</div>
+
+		
+	</div>
+
+</body>
+</html>
